@@ -2,7 +2,7 @@ from typing import Any
 from fastapi import APIRouter
 from fastapi import status
 from schemas.user import CreateUser, ResponseUser
-from services import db_session
+from services import db_session, AuthType
 from repositories import UserRepository
 
 
@@ -19,4 +19,4 @@ async def create(body: CreateUser, db: db_session) -> Any:
 
 
 @router.put("/{id}")
-async def update(id: int, db: db_session): ...
+async def update(id: int, db: db_session, token: AuthType): ...

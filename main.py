@@ -5,6 +5,7 @@ from config import config
 from services.database import session_manager
 
 from views.user import router as user_router
+from views.auth import router as auth_router
 
 
 def init_app(init_db=True):
@@ -21,6 +22,7 @@ def init_app(init_db=True):
 
     server = FastAPI(title="FastAPI server", lifespan=lifespan, debug=config.DEBUG)
     server.include_router(user_router, prefix="/users", tags=["users"])
+    server.include_router(auth_router, prefix="/auth", tags=["authentication"])
 
     return server
 
