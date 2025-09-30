@@ -18,10 +18,14 @@ class Config:
     PWD_CONTEXT = CryptContext(
         schemes=["pbkdf2_sha256", "des_crypt"], deprecated="auto"
     )
-    SECRET_KEY = "3b333fc4fd46c836a2963abff26ec8ba95b69e07450a8984e28194a0ffc26167"
+    SECRET_KEY = os.getenv("SECRET_KEY", None)
     ALGORITHM = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES = 30
     TIME_ZONE = ZoneInfo("Asia/Tehran")
 
+    def __init__(self):
+        if not self.SECRET_KEY:
+            raise ValueError("SECRET KEY must be set")
 
-config = Config
+
+config = Config()

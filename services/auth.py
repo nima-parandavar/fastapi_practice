@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi import Depends
 
 oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="token",
+    tokenUrl="/auth/token",
     description="Authentication for practice",
     refreshUrl="refresh",
 )
@@ -11,3 +11,4 @@ oauth2_scheme = OAuth2PasswordBearer(
 
 AuthType = Annotated[str, Depends(oauth2_scheme)]
 AuthFormData = Annotated[OAuth2PasswordRequestForm, Depends()]
+TokenType = Annotated[str, Depends(oauth2_scheme)]
